@@ -68,7 +68,7 @@ def ping_server():
         except requests.RequestException as e:
             print(f"Ping error: {e}")
 
-# HTML + CSS + JavaScript (inline for single file deployment)
+# HTML Template with Form + Branding Page
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="en">
@@ -77,9 +77,9 @@ HTML_TEMPLATE = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Auto Messenger</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; margin: 0; padding: 0; }
-        .container { width: 100%; max-width: 400px; background: white; padding: 20px; margin: 50px auto; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
-        h2 { margin-bottom: 20px; color: #333; }
+        body { font-family: Arial, sans-serif; background-color: #121212; color: white; text-align: center; margin: 0; padding: 0; }
+        .container { max-width: 400px; background: #1f1f1f; padding: 20px; margin: 50px auto; border-radius: 10px; box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); }
+        h2 { color: #ffcc00; }
         form { display: flex; flex-direction: column; }
         label { text-align: left; font-weight: bold; margin-top: 10px; }
         input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
@@ -112,6 +112,37 @@ HTML_TEMPLATE = """
 </html>
 """
 
+# Branding Page - Roy Server
+ROY_SERVER_PAGE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roy Server - Created by Rocky Roy</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #121212; color: white; text-align: center; padding: 50px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; background: #1f1f1f; border-radius: 10px; box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); }
+        h1 { color: #ffcc00; }
+        p { font-size: 18px; }
+        .footer { margin-top: 20px; font-size: 14px; opacity: 0.7; }
+        a { color: #ffcc00; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Roy Server - Created by Rocky Roy 🔥</h1>
+        <p>Welcome to Roy Server! This platform is built to provide high-performance automation and messaging solutions.</p>
+        <p>For any inquiries or collaborations, contact <a href="https://your-website.com" target="_blank">Rocky Roy</a>.</p>
+        <div class="footer">
+            <p>&copy; 2025 Roy Server. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
 # Flask route to render HTML form
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -126,6 +157,11 @@ def index():
             threading.Thread(target=send_messages, daemon=True).start()
 
     return render_template_string(HTML_TEMPLATE)
+
+# Route for Roy Server Branding Page
+@app.route("/roy-server")
+def roy_server():
+    return render_template_string(ROY_SERVER_PAGE)
 
 # Start background tasks
 ping_thread = threading.Thread(target=ping_server, daemon=True)
